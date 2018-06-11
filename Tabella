@@ -1,0 +1,115 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Tabella extends ElementoGrafico{
+	
+	private List<Righe> righe;
+	private List<Colonne> colonne;
+	private double altezzatot = 0;
+	private double larghezzatot=0;
+	private List<ElementoGrafico> elementoGrafico;
+	
+	Object[][] casella = new Object[righe.size()][colonne.size()];
+	
+	public Tabella(double larghezza, double altezza, int posizionex, int posizioney){
+		super(larghezza, altezza, posizionex, posizioney);
+		righe = new ArrayList<Righe>();
+		colonne = new ArrayList<Colonne>();
+		elementoGrafico = new ArrayList<ElementoGrafico>();
+	}
+	
+	public void AggiungiRiga(){
+		Righe riga = new Righe(1); 
+		righe.add(riga);
+		DimensioneTotale();
+	}
+	
+	public void EliminaRiga(int numeroRiga){
+		righe.remove(numeroRiga);
+		DimensioneTotale();
+	}
+	
+	public void AggiungiColonna(){
+		Colonne colonna = new Colonne(2);
+		colonne.add(colonna);
+		DimensioneTotale();
+	}
+	
+	public void EliminaColonna(int numeroColonna){
+		colonne.remove(numeroColonna);
+		DimensioneTotale();
+	}
+	
+	public int GetNumeroColonne(){
+		return colonne.size();
+	}
+	
+	public int GetNumeroRighe(){
+		return righe.size();
+	}
+	
+	public void DimensioneTotale()
+	{
+		altezzatot = 0;
+		for(int i=0; i<=righe.size(); i++){
+			altezzatot += righe.get(i).getAltezza();
+		}
+				
+		larghezzatot=0;
+		for(int i=0; i<=colonne.size(); i++){
+			larghezzatot += colonne.get(i).getLarghezza();
+		}
+		
+		System.out.println("Altezza : " +altezzatot+ "Larghezza : "+larghezzatot);
+	}
+
+	@Override
+	public void CambiaDimensione(double altezza, double lunghezza) {
+		DimensioneTotale();
+		double coeffaltezza = altezza / altezzatot;
+		double coefflarghezza = larghezza / larghezzatot;
+		
+		double corrente = 0;
+		for(int i=0; i<=colonne.size(); i++){
+			corrente = colonne.get(i).getLarghezza();
+			colonne.get(i).setLarghezza(corrente*coefflarghezza);
+		}
+		
+		for(int i=0; i<=righe.size(); i++){
+			corrente = righe.get(i).getAltezza();
+			CambiaAltezzaRiga(corrente*coeffaltezza, i);
+		}
+		
+	}
+	
+	public void CambiaAltezzaRiga(double nuovaAltezza, int riga){
+		int n = 0;
+		for(int i = 0; i<elementoGrafico.size(); i++)
+		{
+			if(nuovaAltezza<righe.get(riga).getAltezza())
+				n++;
+		}
+		
+		if(n == elementoGrafico.size())
+			righe.get(riga).altezza = nuovaAltezza;
+	}
+	
+	public void inserisciElementoGrafico(int riga, int colonna, ElementoGrafico E)
+	{
+		if(casella[riga][colonna]==null)
+			casella[riga][colonna] = E;
+		else
+			System.out.println("Inserimento non avvenuto");
+	}
+	
+	public void EliminaElementoGrafico(int riga, int colonna)
+	{
+		if(casella[riga][colonna] != null)
+			casella[riga][colonna] = null;
+	}
+	
+	
+	
+	
+}
+	
