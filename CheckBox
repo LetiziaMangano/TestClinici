@@ -1,0 +1,50 @@
+public class CheckBox extends ElementoGrafico {
+
+	boolean risposta;
+	Label label = new Label();
+	double altezzalabel = label.getAltezza();
+	double larghezzalabel = label.getLarghezza();
+	
+	public CheckBox(double larghezza, double altezza, int posizionex, int posizioney)
+	{
+		super(larghezza, altezza, posizionex, posizioney);
+		this.larghezza = larghezzalabel + 0.002;
+		this.altezza = max(altezzalabel, 0.002);
+	}
+	
+	public void CheckRisposta(boolean rispostaUtente)
+	{
+		risposta = rispostaUtente;
+	}
+	
+	public double max(double X, double Y)
+	{
+		if(X>Y)
+			return X;
+		else
+			return Y;
+	}
+	
+	@Override
+	public void CambiaDimensione(double altezzanuovalabel, double larghezzanuovalabel)
+	{
+		double altezzatotale = max(altezzalabel, 0.002);
+		double larghezzatotale = larghezzalabel + 0.002;
+		
+		boolean conferma = label.ControllaDimensione(altezzanuovalabel, larghezzanuovalabel);
+		if(conferma == true)
+		{
+			this.altezza=altezzatotale;
+			this.larghezza=larghezzatotale;
+			label.CambiaDimensione(altezzanuovalabel, larghezzanuovalabel);
+		}
+		
+		else
+			System.out.println("Impossibile modificare la dimensione della checkbox");
+		
+		
+	}
+	
+	
+	
+}
