@@ -1,0 +1,37 @@
+public class Font {
+
+	public final String VERDANA = "Verdana";
+	public final String CALIBRI = "Calibri";
+	public final String TIME = "Times New Romans";
+	public final String COMIC = "Comics Sans";
+	public String tipo;
+	public double fattore;
+	
+	public Font(){
+		super();
+	}
+	public Font(double fattore){
+		this.fattore=fattore;
+	}
+	
+	public String visualizzaFontDisponibili()
+	{
+		return "Font disponibili: " + VERDANA + TIME + CALIBRI + COMIC; 
+	}
+
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		if(tipo == VERDANA || tipo == CALIBRI || tipo == TIME || tipo == COMIC)
+			this.tipo = tipo;
+		
+		else{
+			System.out.println("***ERRORE***");
+			System.out.println("Tipo Font non riconosciuta");
+		}
+		
+	}
+}
