@@ -1,0 +1,34 @@
+public class ElementoGrafico {
+
+	public double larghezza;
+	public double altezza; 
+	int posizionex;
+	int posizioney;
+	
+	public ElementoGrafico(double larghezza, double altezza, int posizionex, int posizioney)
+	{
+		this.larghezza=larghezza;
+		this.altezza=altezza;
+		this.posizionex=posizionex;
+		this.posizioney=posizioney;
+	}
+
+	public ElementoGrafico() {
+	}
+	
+	public double getLarghezza() {
+		return larghezza;
+	}
+	
+	
+	public void CambiaDimensione(double altezza, double lunghezza) {
+		this.altezza=altezza;
+		this.larghezza=lunghezza;
+	}
+
+	public double getAltezza() {
+		return altezza;
+	}
+
+	
+}
