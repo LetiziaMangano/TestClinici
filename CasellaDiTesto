@@ -1,0 +1,15 @@
+
+public class CasellaDiTesto extends ElementoGrafico {
+
+	private String testo;
+
+	public CasellaDiTesto(double larghezza, double altezza, int posizionex, int posizioney)
+	{
+		super(larghezza, altezza, posizionex, posizioney);
+	}
+	
+	public void Inserisci(String testo)
+	{
+		this.testo = testo;
+	}
+}
