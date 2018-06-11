@@ -1,0 +1,17 @@
+
+public class Righe {
+
+	public double altezza;
+	
+	
+	public Righe(double altezza)
+	{
+		this.altezza=altezza;
+	}
+
+	public double getAltezza() {
+		return altezza;
+	}
+	
+	
+}
