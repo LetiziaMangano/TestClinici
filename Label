@@ -1,0 +1,81 @@
+import java.util.Scanner;
+
+public class Label extends ElementoGrafico {
+
+	int DimTesto; 
+	private String Testo;
+	Font tipo = new Font();
+	Scanner tastiera = new Scanner(System.in);
+	double alt = this.getAltezza();
+	double lar = this.getLarghezza();
+
+	public Label(double larghezza, double altezza, int posizionex, int posizioney, int DimTesto, String Testo)
+	{
+		super(larghezza, altezza, posizionex, posizioney);
+		this.Testo=Testo;
+		this.DimTesto = DimTesto;
+	}
+	
+	public Label(){	
+	}
+	
+	public void CambiaTesto(String nuovoTesto)
+	{
+		this.Testo = nuovoTesto;
+		CambiaDimensioneSistema(alt, lar);
+	}
+	
+	public void CambiaDimensione(int nuovaDimensione)
+	{
+		DimTesto = nuovaDimensione;
+		CambiaDimensioneSistema(alt, lar);
+	}
+	
+	public void CambiaFont()
+	{
+		System.out.println(tipo.visualizzaFontDisponibili());
+		System.out.println("Inserire il nome del font desiderato");
+		String scelta;
+		scelta = tastiera.nextLine();
+		scelta = scelta.toUpperCase();
+		tipo.setTipo(scelta);
+		CambiaDimensioneSistema(alt, lar);
+		
+	}
+	
+	private void CambiaDimensioneSistema(double altezza, double larghezza)
+	{
+		double dimensionetotale = altezza*larghezza;
+		double dimensionenecessaria = DimTesto*Testo.length()*tipo.fattore;
+		
+		while(dimensionetotale<=dimensionenecessaria)
+			altezza += 1;
+	}
+	
+	@Override 
+	public void CambiaDimensione(double altezza, double larghezza) {
+		
+		boolean conferma = ControllaDimensione(altezza, larghezza);
+		if(conferma == false)
+		 System.out.println("Impossibile ridimensionare la label");
+		
+		else{
+			this.altezza = altezza;
+			this.larghezza = larghezza;
+		}
+	}
+	
+	public boolean ControllaDimensione(double altezza, double larghezza){
+		double dimensionetotale = altezza*larghezza;
+		double dimensionenecessaria = DimTesto*Testo.length()*tipo.fattore;
+		
+		if(dimensionetotale >= dimensionenecessaria)
+			return true;
+		
+		else
+			return false;
+	}
+		
+	}
+
+
